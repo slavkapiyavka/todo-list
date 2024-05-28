@@ -1,9 +1,10 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react"
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react"
 import PlaceholderText from "./PlaceholderTextComponent"
 
 interface Todo { title: string, checked: boolean }
 
 function App() {
+  const todoInputRef = useRef<HTMLInputElement>(null)
   const [inputValue, setInputValue] = useState<string>('')
   const [todos, setTodos] = useState<Todo[]>([])
   const [disabledSubmitButton, setDisabledSubmitButton] = useState(!inputValue)
@@ -20,6 +21,10 @@ function App() {
   useEffect(() => {
     if (!loading) {
       localStorage.setItem('todos', JSON.stringify(todos))
+    }
+
+    if (todoInputRef.current) {
+      todoInputRef.current.focus()
     }
   }, [loading, todos])
 
@@ -62,7 +67,13 @@ function App() {
         (
           <>
               <form onSubmit={onFormSubmit} className="todo-form">
-                <input className="todo-form__input" type="text" value={inputValue} onChange={onInputValueChange} />
+                <input
+                  className="todo-form__input"
+                  type="text"
+                  value={inputValue}
+                  onChange={onInputValueChange}
+                  ref={todoInputRef}
+                />
                 <button type="submit" disabled={disabledSubmitButton}>Add</button>
               </form>
 
