@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react"
+import { ChangeEvent, FocusEvent, FormEvent, useEffect, useRef, useState } from "react"
 import PlaceholderText from "./PlaceholderTextComponent"
 
 interface Todo { title: string, checked: boolean }
@@ -43,7 +43,7 @@ function App() {
     setEditTodoValue(todos[id].title)
   }
 
-  const onTodoEditEnd = (e) => {
+  const onTodoEditEnd = (e: FocusEvent<HTMLInputElement, Element>) => {
     if (e.target.value) {
       const updatedTodos = todos
       if (editTodoIndex) {
