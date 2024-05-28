@@ -16,15 +16,15 @@ function App() {
       setTodos(JSON.parse(savedTodos)) 
     }
     setLoading(false)
-  }, [])
+
+    if (todoInputRef.current) {   
+      todoInputRef.current.focus()
+    }
+  }, [loading])
 
   useEffect(() => {
     if (!loading) {
       localStorage.setItem('todos', JSON.stringify(todos))
-    }
-
-    if (todoInputRef.current) {
-      todoInputRef.current.focus()
     }
   }, [loading, todos])
 
@@ -41,7 +41,7 @@ function App() {
     const inputValue = input.value.trim()
     
     if(inputValue.length >= 1) {
-      setTodos([...todos, { title: inputValue, checked: false}])
+      setTodos([{ title: inputValue, checked: false}, ...todos])
       setInputValue('')
       setDisabledSubmitButton(true)
     }
