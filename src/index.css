@@ -123,7 +123,9 @@ button:not(:disabled):active {
 
 .todo-element {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto auto;
+  gap: 0 6px;
+  align-items: center;
   border-radius: var(--border-radius-8);
   background-color: transparent;
   transition: background-color 125ms, transform 125ms;
@@ -136,6 +138,11 @@ button:not(:disabled):active {
 .todo-element:has(.todo-element__label:hover),
 .todo-element:has(.todo-element__checkbox:focus-visible) {
   background-color: #eeeef8;
+}
+
+.todo-element_edit-mode {
+  background-color: #a1e2a1 !important;
+  transform: none !important;
 }
 
 .todo-element__label {
@@ -198,8 +205,19 @@ button:not(:disabled):active {
   line-height: 1.25em;
 }
 
-.todo-element__remove-button {
-  display: inline-flex;
+.todo-element__title_edit-mode {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.todo-element__remove-button,
+.todo-element__edit-button {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
   aspect-ratio: 1;
   padding: 2px;
 }
