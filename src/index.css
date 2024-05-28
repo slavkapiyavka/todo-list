@@ -82,6 +82,8 @@ button:not(:disabled):active {
 
 .app {
   width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
   padding: 8px 12px;
 }
 
@@ -131,20 +133,64 @@ button:not(:disabled):active {
   transform: scale(0.99);
 }
 
-.todo-element:has(.todo-element__label:hover) {
+.todo-element:has(.todo-element__label:hover),
+.todo-element:has(.todo-element__checkbox:focus-visible) {
   background-color: #eeeef8;
 }
 
 .todo-element__label {
   display: flex;
+  align-items: center;
   gap: 0 4px;
   padding: 4px 6px;
-  align-items: center;
 }
 
-.todo-element__checkbox:checked + .todo-element__title {
+.todo-element__label:has(.todo-element__checkbox:checked) .todo-element__pseudo-checkbox {
+  color: green;
+  outline-width: 2px;
+}
+.todo-element__label:has(.todo-element__checkbox:checked) .todo-element__pseudo-checkbox::after {
+  transform: scale(1);
+}
+
+.todo-element__label:has(.todo-element__checkbox:focus-visible:not(:checked)) .todo-element__pseudo-checkbox {
+  color: var(--blue-focus-visible);
+  outline-width: 2px;
+}
+
+.todo-element__label:has(.todo-element__checkbox:checked) .todo-element__title {
   text-decoration: line-through;
   opacity: 0.6;
+}
+
+.todo-element__checkbox {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.todo-element__pseudo-checkbox {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  aspect-ratio: 1;
+  color: var(--light-blue);
+  border-radius: var(--border-radius-8);
+  outline: 1px solid currentColor;
+  transition: outline 125ms;
+}
+
+.todo-element__pseudo-checkbox::after {
+  content: "";
+  position: absolute;
+  inset: 23%;
+  width: 10px;
+  height: 10px;
+  border-radius: inherit;
+  background-color: currentColor;
+  transform: scale(0);
 }
 
 .todo-element__title {

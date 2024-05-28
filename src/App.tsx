@@ -91,6 +91,7 @@ function App() {
                         checked={todo.checked}
                         onChange={() => onTodoCheck(index)}
                       />
+                      <div className="todo-element__pseudo-checkbox"></div>
                       <span className="todo-element__title">{todo.title}</span>
                     </label>
                     <button onClick={() => onTodoRemove(index)} className="todo-element__remove-button">
