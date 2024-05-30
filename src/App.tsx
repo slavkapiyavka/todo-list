@@ -34,7 +34,10 @@ function App() {
   
   const onTodoCheck = (id: number) => {
     const updatedTodos = todos
-    updatedTodos[id].checked = !updatedTodos[id].checked
+    const found = updatedTodos.find(todo => todo.id === id)
+    if (found) {
+      found.checked = !found.checked
+    }
     setTodos([...updatedTodos])
   }
 
