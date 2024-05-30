@@ -1,5 +1,5 @@
 import { ChangeEvent, FocusEvent, FormEvent, useEffect, useRef, useState } from "react"
-import PlaceholderText from "./PlaceholderTextComponent"
+import PlaceholderText from "./components/PlaceholderText/PlaceholderText"
 
 interface Todo { id: number, title: string, checked: boolean }
 
